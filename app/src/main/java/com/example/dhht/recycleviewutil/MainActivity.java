@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.example.recyclelibrary.CommonAdapter;
 import com.example.recyclelibrary.CommonViewHolder;
+import com.example.recyclelibrary.MultiItemCommonAdpter;
+import com.example.recyclelibrary.MultiItemTypeSupport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,24 +29,52 @@ public class MainActivity extends AppCompatActivity {
             stringList.add(String.valueOf(i));
         }
 
-        CommonAdapter adapter = new CommonAdapter<String>(MainActivity.this, stringList, R.layout.item_test) {
+
+        MultiItemTypeSupport<String> multiItemTypeSupport = new MultiItemTypeSupport<String>() {
             @Override
-            public void onBindView(final CommonViewHolder holder, String o) {
-                holder.setText(R.id.tv, o);
-                holder.setOnClick(R.id.tv, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(MainActivity.this, holder.getAdapterPosition() + "", Toast.LENGTH_SHORT).show();
-                    }
-                });
+            public int getLayoutId(int itemType) {
+                switch (itemType) {
+                    case 0:
+                        return R.layout.item_test;
+                    case 1:
+                        return R.layout.item_test2;
+                    default:
+                        break;
+                }
+                return 0;
+            }
+
+            @Override
+            public int getItemViewType(int position, String s) {
+                if (position % 2 == 0) {
+                    return 0;
+                }
+                return 1;
             }
         };
 
+        MultiItemCommonAdpter<String> adpter = new MultiItemCommonAdpter<String>(MainActivity.this, stringList, multiItemTypeSupport) {
+            @Override
+            public void onBindView(final CommonViewHolder holder, String s) {
+
+                if (holder.getItemViewType() == 0) {
+                    holder.setText(R.id.tv, s);
+                    holder.setOnClick(R.id.tv, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(MainActivity.this, holder.getAdapterPosition() + "Type=0", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    holder.setText(R.id.tv_txt, s);
+                }
+
+
+            }
+        };
         rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        rv.setAdapter(adapter);
-
-
-
-
+        rv.setAdapter(adpter);
     }
+
+
 }

@@ -28,35 +28,21 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 30; i++) {
             stringList.add(String.valueOf(i));
         }
-
-
         MultiItemTypeSupport<String> multiItemTypeSupport = new MultiItemTypeSupport<String>() {
+
             @Override
             public int getLayoutId(int itemType) {
-                switch (itemType) {
-                    case 0:
-                        return R.layout.item_test;
-                    case 1:
-                        return R.layout.item_test2;
-                    default:
-                        break;
-                }
                 return 0;
             }
 
             @Override
             public int getItemViewType(int position, String s) {
-                if (position % 2 == 0) {
-                    return 0;
-                }
-                return 1;
+                return 0;
             }
         };
-
         MultiItemCommonAdpter<String> adpter = new MultiItemCommonAdpter<String>(MainActivity.this, stringList, multiItemTypeSupport) {
             @Override
             public void onBindView(final CommonViewHolder holder, String s) {
-
                 if (holder.getItemViewType() == 0) {
                     holder.setText(R.id.tv, s);
                     holder.setOnClick(R.id.tv, new View.OnClickListener() {
@@ -68,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     holder.setText(R.id.tv_txt, s);
                 }
-
-
             }
         };
         rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

@@ -24,7 +24,7 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
 
     @Override
     public CommonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return CommonViewHolder.get(mContext,parent,layoutResourceId);
+        return CommonViewHolder.get(mContext, parent, layoutResourceId);
     }
 
     @Override
@@ -39,4 +39,11 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
 
     public abstract void onBindView(CommonViewHolder holder, T t);
 
+    public void replaceData(List<T> datas) {
+        if (datas == null) {
+            throw new NullPointerException();
+        }
+        mDatas = datas;
+        notifyDataSetChanged();
+    }
 }

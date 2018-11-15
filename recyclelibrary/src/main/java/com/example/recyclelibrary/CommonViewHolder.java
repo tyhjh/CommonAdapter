@@ -48,5 +48,4 @@ public class CommonViewHolder extends RecyclerView.ViewHolder {
 
 
 
-
 }

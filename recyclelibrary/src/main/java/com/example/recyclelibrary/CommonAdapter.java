@@ -46,4 +46,23 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
         mDatas = datas;
         notifyDataSetChanged();
     }
+
+    public void insertData(int position, T data) {
+        mDatas.add(position, data);
+        notifyItemInserted(position);
+    }
+
+    public void removeData(int position) {
+        mDatas.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void changeData(int position, T data) {
+        mDatas.set(position, data);
+        notifyItemChanged(position);
+    }
+
+    public List<T> getDatas() {
+        return mDatas;
+    }
 }

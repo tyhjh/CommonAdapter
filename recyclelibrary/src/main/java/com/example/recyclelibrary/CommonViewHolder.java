@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+/**
+ * @author dhht
+ */
 public class CommonViewHolder extends RecyclerView.ViewHolder {
 
     private SparseArray<View> mViews;
@@ -46,6 +49,8 @@ public class CommonViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-
+    public View getConvertView() {
+        return mConvertView;
+    }
 
 }

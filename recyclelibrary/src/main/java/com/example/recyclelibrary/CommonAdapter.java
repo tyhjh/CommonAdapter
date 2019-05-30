@@ -52,6 +52,11 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
         notifyItemInserted(position);
     }
 
+    public void insertData(int position, List<T> data) {
+        mDatas.addAll(position, data);
+        notifyDataSetChanged();
+    }
+
     public void removeData(int position) {
         mDatas.remove(position);
         notifyItemRemoved(position);

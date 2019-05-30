@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+/**
+ * @author dhht
+ */
 public class TestAdapter extends RecyclerView.Adapter<TestAdapter.MyViewHolder> {
 
     List<String> list;

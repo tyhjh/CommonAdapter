@@ -32,7 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public int getLayoutId(int itemType) {
-                return 0;
+                if(itemType==0){
+                    return R.layout.item_test;
+                }else {
+                    return R.layout.item_test2;
+                }
+
             }
 
             @Override
